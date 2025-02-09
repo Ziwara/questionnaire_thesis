@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are You Sure?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .yes-button {
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .no-button {
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Will you be my Valentine?</h1>
+    <div class="button-container">
+        <button class="yes-button" onclick="handleYesClick()">Yes</button>
+        <button class="no-button" onclick="handleNoClick()">No</button>
+    </div>
+
+    <script>
+        const messages = ["Are you sure?", "Really sure?", "Think again!", "Last chance!"];
+        let messageIndex = 0;
+
+        function handleNoClick() {
+            const noButton = document.querySelector(".no-button");
+            const yesButton = document.querySelector(".yes-button");
+            
+            noButton.textContent = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length;
+
+            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            yesButton.style.fontSize = `${currentSize * 1.5}px`;
+        }
+
+        function handleYesClick() {
+            window.location.href = "yes_page.html";
+        }
+    </script>
+</body>
+</html>
