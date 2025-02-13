@@ -3,61 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Are You Sure?</title>
+    <title>Important Survey</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             text-align: center;
-            margin: 50px;
+            font-family: Arial, sans-serif;
+            background-color: #fff5f8;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
+
+        #survey-container, #valentine-container {
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .hidden {
+            display: none;
+        }
+
         .button-container {
             margin-top: 20px;
         }
+
         button {
-            font-size: 16px;
-            padding: 10px 20px;
+            font-size: 18px;
+            padding: 10px 15px;
             margin: 10px;
+            border: none;
             cursor: pointer;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            border-radius: 5px;
         }
+
         .yes-button {
-            background-color: green;
+            background-color: #ff4d6d;
             color: white;
-            border: none;
+            transition: background 0.3s ease;
+        }
+
+        .yes-button:hover {
+            background-color: #e03e5a;
+            transform: scale(1.1);
+        }
+
+        .no-button {
+            background-color: #999;
+            color: white;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .no-button:hover {
+            background-color: #777;
+        }
+
+        img {
+            max-width: 100%;
             border-radius: 5px;
         }
-        .no-button {
-            background-color: red;
-            color: white;
-            border: none;
-            border-radius: 5px;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <h1>Will you be my Valentine?</h1>
-    <div class="button-container">
-        <button class="yes-button" onclick="handleYesClick()">Yes</button>
-        <button class="no-button" onclick="handleNoClick()">No</button>
+
+    <h1 id="survey-title">Important Survey 📊</h1>
+
+    <div id="survey-container">
+        <p id="question">Loading question...</p>
+        <div id="choices-container"></div>
     </div>
 
+    <div id="valentine-container" class="hidden">
+        <h1>Will you be my Valentine? 💖</h1>
+        <div id="gif-container">
+            <img id="main-gif" src="intro.gif" width="300" alt="Intro GIF">
+        </div>
+        <p id="flavor-text">Think carefully before answering! 🤔</p>
+
+        <div class="button-container">
+            <button class="yes-button" onclick="handleYesClick()">Yes</button>
+            <button class="no-button" onclick="handleNoClick()">No</button>
+        </div>
+    </div>
+
+    <audio id="click-sound" src="click.wav"></audio>
+
     <script>
-        const messages = ["Are you sure?", "Really sure?", "Think again!", "Last chance!"];
-        let messageIndex = 0;
+        let surveyStep = 0;
+        let noClickCount = 0;
+
+        const surveyData = [
+            { question: "What's your favorite season?", choices: ["Summer ☀️", "Winter ❄️", "Spring 🌸", "Fall 🍂"] },
+            { question: "Pick a pet!", choices: ["Dog 🐶", "Cat 🐱", "Fish 🐟", "Lizard 🦎", "Other"] },
+            { question: "Which drink is the best?", choices: ["Coffee ☕", "Tea 🍵", "Soda 🥤", "Water 💧", "Other"] },
+            { question: "Choose a superpower!", choices: ["Invisibility 🫥", "Gravity Control 🌀", "Super Strength 💪", "Time Travel ⏳", "Other"] },
+            { question: "Final Question... are you ready?", choices: ["Yes ✅", "No ❌", "Maybe 🤔", "What’s happening? 😳"] }
+        ];
+
+        const messages = [
+            "Are you sure? 🥺", "Please reconsider... 😢", "You’re breaking my heart... 💔",
+            "I'll teach you how to ride a bike... 🚲", "What if I cry? 😭", "Think of the starving children in Africa! 👶",
+            "Last chance! 🫣", "Aww, really? 😞", "Really? No regrets? 😔",
+            "Okay... goodbye forever. 👋"
+        ];
+
+        function playClickSound() {
+            const sound = document.getElementById("click-sound");
+            sound.currentTime = 0;
+            sound.play();
+        }
+
+        function nextQuestion() {
+            playClickSound();
+            if (surveyStep < surveyData.length) {
+                const questionText = document.getElementById("question");
+                const choicesContainer = document.getElementById("choices-container");
+
+                questionText.textContent = surveyData[surveyStep].question;
+                choicesContainer.innerHTML = "";
+
+                surveyData[surveyStep].choices.forEach(choice => {
+                    const button = document.createElement("button");
+                    button.textContent = choice;
+                    button.onclick = nextQuestion;
+                    button.addEventListener("click", playClickSound);
+                    choicesContainer.appendChild(button);
+                });
+
+                surveyStep++;
+            } else {
+                document.getElementById("survey-container").classList.add("hidden");
+                document.getElementById("survey-title").textContent = "SURPRISE!";
+                document.getElementById("valentine-container").classList.remove("hidden");
+            }
+        }
 
         function handleNoClick() {
+            playClickSound();
             const noButton = document.querySelector(".no-button");
-            const yesButton = document.querySelector(".yes-button");
-            
-            noButton.textContent = messages[messageIndex];
-            messageIndex = (messageIndex + 1) % messages.length;
+            const gif = document.getElementById("main-gif");
+            const flavorText = document.getElementById("flavor-text");
 
-            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-            yesButton.style.fontSize = `${currentSize * 1.5}px`;
+            if (noClickCount < 9) {
+                flavorText.textContent = messages[noClickCount];
+                noButton.style.transform = `scale(${1 - noClickCount * 0.1})`;
+                gif.src = "no.gif";
+            } else {
+                noButton.classList.add("hidden");
+                flavorText.textContent = "Aww, you like me that much? 💕 (Impossible)";
+            }
+
+            noClickCount++;
         }
 
         function handleYesClick() {
-            window.location.href = "yes_page.html";
+            playClickSound();
+            const gif = document.getElementById("main-gif");
+            const flavorText = document.getElementById("flavor-text");
+
+            gif.src = "yes.gif";  
+            flavorText.textContent = "YAY! You made my day! ❤️🥰";
+
+            setTimeout(() => {
+                window.location.href = "yes_page.html";
+            }, 2000);
         }
+
+        window.onload = nextQuestion;
     </script>
+
 </body>
 </html>

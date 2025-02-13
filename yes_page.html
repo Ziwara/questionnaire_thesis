@@ -8,13 +8,95 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 50px;
+            background-color: #fff5f8;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #container {
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        h1 {
+            color: #ff4d6d;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        .hidden {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #ff4d6d;
+            color: white;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #e03e5a;
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <h1>Congratulations! 🎉</h1>
-    <p>I love you too!!!!!!!!!!!!!!!!</p>
-    <a href="index.html">Go back</a>
+
+    <div id="container">
+        <h1>Thanks!!</h1>
+        <p>Send a screenshot of this page and send it to me pweasee! ❤️</p>
+        
+        <button onclick="showLetter()">Open a Secret Letter 💌</button>
+        
+        <div id="letter" class="hidden" style="text-align: justify;">
+            <h2 style="text-align: center;">Dear You,</h2>
+            <p style="text-indent: 30px;">
+                I just wanted to take a moment to tell you how special you are to me.  
+                Even if we're a little awkward... actually, scrap the "little" part because we REALLY are.  
+                At this point, if awkwardness was an Olympic sport, we’d be gold medalists.
+            </p>
+            <p style="text-indent: 30px;">
+                But honestly, I wouldn't have it any other way because, despite all that, its still you that I keep falling for.  
+                You make even the most random moments feel special, and somehow, I find myself smiling like an idiot just thinking about you.  
+                So, thank you for being you.
+            </p>
+            <p style="text-align: center;">Sincerely, Ziwara</p>
+        </div>
+
+        <br>
+        <br>
+        <a href="index.html">Go back</a>
+    </div>
+
+    <script>
+        function showLetter() {
+            const letter = document.getElementById("letter");
+            letter.classList.remove("hidden");
+            setTimeout(() => { letter.style.opacity = "1"; }, 100); // Smooth fade-in effect
+        }
+    </script>
+
 </body>
 </html>
