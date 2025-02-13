@@ -121,12 +121,12 @@
 
         const surveyData = [
             { question: "What would be your favorite season? (If the Philippines had them)", choices: ["Summer ☀️", "Winter ❄️", "Spring 🌸", "Fall 🍂"] },
-            { question: "Pick a pet!", choices: ["Dog 🐶", "Cat 🐱", "Fish 🐟", "Lizard 🦎", "Other"] },
-            { question: "Which drink is the best?", choices: ["Coffee ☕", "Sting ⚡", "Coke 🥤", "Water 💧", "Other"] },
-            { question: "Which vehicle do you like more?", choices: ["Car 🚗", "Motorcycle 🏍️", "Skateboard 🛹", "Bike 🚲 (LMAO)", "Other"] },
+            { question: "Pick a pet!", choices: ["Dog 🐶", "Cat 🐱", "Fish 🐟", "Lizard 🦎"] },
+            { question: "Which drink is the best?", choices: ["Coffee ☕", "Sting ⚡", "Coke 🥤", "Water 💧"] },
+            { question: "Which vehicle do you like more?", choices: ["Car 🚗", "Motorcycle 🏍️", "Skateboard 🛹", "Bike 🚲 (LMAO)"] },
             { question: "If you become the president all of a sudden, what would you do?", choices: ["Enforce World Peace (Impossible) ☮️", "Print Infinite Money 💰", "Resign immediately 🏃💨", "Implement a five-year socio-economic reform plan focused on sustainable infrastructure, wealth redistribution, and systemic anti-corruption measures while navigating geopolitical tensions and ensuring national stability. 📜🤓", "Kill Everyone"] },
-            { question: "If you were given a time machine, where (or when) would you go?", choices: ["Back to the dinosaurs and ride a T-Rex 🦖", "The medieval times to become a knight ⚔️", "The future to see flying cars 🚀", "Back to 5 minutes ago to avoid answering this question ⏳", "Nowhere, time travel is dangerous and full of paradoxes! 😰", "Carefully study the butterfly effect, ensure minimal timeline disruption, and establish a set of ethical guidelines before making any temporal excursions. 📖🧐"] },  
-            { question: "If you could have one superpower, what would it be?", choices: ["Invisibility 🫥", "Gravity Control 🌀", "Super Strength 💪", "Time Travel ⏳", "Summon unlimited snacks 🍕🍩", "Develop an advanced understanding of quantum mechanics, allowing me to manipulate matter and energy at a subatomic level, fundamentally reshaping reality as we know it. ⚛️🧠"] },
+            { question: "If you were given a time machine, where (or when) would you go?", choices: ["Back to the dinosaurs and ride a T-Rex 🦖", "The medieval times to become a knight ⚔️", "The future to see flying cars 🚀", "Back to 5 minutes ago to avoid answering this question ⏳", "Nowhere, time travel is dangerous and full of paradoxes! 😰"] },  
+            { question: "If you could have one superpower, what would it be?", choices: ["Invisibility 🫥", "Gravity Control 🌀", "Super Strength 💪", "Time Travel ⏳", "Summon unlimited snacks 🍕🍩", "I don't want any (BORING!)"] },
             { question: "You wake up and find out you’re now the main character in an anime. What’s your genre?", choices: ["Shonen – Time to train for 100 episodes 💪🔥", "Romance – Where’s my love triangle? 💕", "Isekai – Guess I live in a fantasy world now 🏰", "Slice of Life – Just chilling, nothing happens ☕", "Horror – Wait... why is everything dark? 👀", "A complex psychological thriller with layers of deep character development, intricate political themes, and existential dilemmas, culminating in a thought-provoking yet ambiguous ending. 🧩🤯"] },  
             { question: "A genie appears and grants you one wish. What do you ask for?", choices: ["Infinite money 💰", "World peace 🌍✌️", "Superpowers, obviously ⚡", "Unlimited food that never goes bad 🍔", "To carefully word my wish in a way that ensures there are no loopholes, unintended consequences, or reality-breaking paradoxes, while maximizing long-term benefits for both myself and society as a whole. 🎓📜"] },  
             { question: "Final Question... are you ready?", choices: ["Yes ✅", "No ❌", "Maybe 🤔", "What’s happening? 😳"] }
@@ -145,6 +145,13 @@
             sound.play();
         }
 
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
         function nextQuestion() {
             playClickSound();
             if (surveyStep < surveyData.length) {
@@ -154,7 +161,11 @@
                 questionText.textContent = surveyData[surveyStep].question;
                 choicesContainer.innerHTML = "";
 
-                surveyData[surveyStep].choices.forEach(choice => {
+                // Clone the choices array and shuffle them
+                let shuffledChoices = [...surveyData[surveyStep].choices];
+                shuffleArray(shuffledChoices);
+
+                shuffledChoices.forEach(choice => {
                     const button = document.createElement("button");
                     button.textContent = choice;
                     button.onclick = nextQuestion;

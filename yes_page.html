@@ -31,6 +31,7 @@
                 }
         }
 
+
         #container {
             max-width: 500px;
             background: white;
@@ -82,7 +83,7 @@
         <h1>Thanks!!</h1>
         <p>Send a screenshot of this page and send it to me pweasee! ❤️</p>
         
-        <button onclick="showLetter()">Letter for You! ✉️</button>
+        <button onclick="showLetter()">Open a Secret Letter 💌</button>
         
         <div id="letter" class="hidden" style="text-align: justify;">
             <h2 style="text-align: center;">Dear You,</h2>
@@ -104,8 +105,11 @@
         <a href="index.html">Go back</a>
     </div>
 
+    <audio id="open-sound" src="paper_open.ogg"></audio>
+
     <script>
         function showLetter() {
+            document.getElementById("open-sound").play(); // Play sound effect
             const letter = document.getElementById("letter");
             letter.classList.remove("hidden");
             setTimeout(() => { letter.style.opacity = "1"; }, 100); // Smooth fade-in effect
