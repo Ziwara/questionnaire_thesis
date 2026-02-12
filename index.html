@@ -1,219 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Important Survey</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Lora', serif;
-            text-align: center;
-            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
-            background-size: 300% 300%;
-            animation: gradientBG 8s ease infinite;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Important Survey</title>
 
-        @keyframes gradientBG {
-                0% {
-                    background-position: 0% 50%;
-                }
-                50% {
-                    background-position: 100% 50%;
-                }
-                100% {
-                    background-position: 0% 50%;
-                }
-        }
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
 
-        #survey-container, #valentine-container {
-            max-width: 500px;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 0.8s ease-in-out;
-        }
+<style>
+body {
+    font-family: 'Lora', serif;
+    text-align: center;
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+    background-size: 300% 300%;
+    animation: gradientBG 8s ease infinite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
 
-        .hidden {
-            display: none;
-        }
+small_text {
+    font-family: 'Lora', serif;
+    text-align: center;
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+    background-size: 300% 300%;
+    animation: gradientBG 8s ease infinite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-size: 2px;
+}
 
-        .button-container {
-            margin-top: 20px;
-        }
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-        button {
-            font-size: 18px;
-            padding: 10px 15px;
-            margin: 10px;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            border-radius: 5px;
-        }
+.container {
+    max-width: 500px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    animation: fadeIn 0.8s ease-in-out;
+}
 
-        .yes-button {
-            background-color: #ff4d6d;
-            color: white;
-            transition: background 0.3s ease;
-        }
+.hidden {
+    display: none;
+}
 
-        .yes-button:hover {
-            background-color: #e03e5a;
-            transform: scale(1.1);
-        }
+button {
+    font-size: 16px;
+    padding: 10px 15px;
+    margin: 8px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
 
-        .no-button {
-            background-color: #999;
-            color: white;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
+button:hover {
+    transform: scale(1.05);
+}
 
-        .no-button:hover {
-            background-color: #777;
-        }
+.yes-button {
+    background-color: #ff4d6d;
+    color: white;
+}
 
-        img {
-            max-width: 100%;
-            border-radius: 5px;
-        }
+.yes-button:hover {
+    background-color: #e03e5a;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+.no-button {
+    background-color: #888;
+    color: white;
+}
+
+input {
+    padding: 8px;
+    width: 80%;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+#main-gif {
+    margin-top: 15px;
+    transition: opacity 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
 </head>
+
 <body>
 
-    <h1 id="survey-title">Important Survey 📊</h1>
+<h1 id="survey-title">Important Survey 📊</h1>
 
-    <div id="survey-container">
-        <p id="question">Loading question...</p>
-        <div id="choices-container"></div>
-    </div>
+<!-- NAME INPUT -->
+<div id="name-container" class="container">
+    <h2>Before we begin...</h2>
+    <p>Please enter your name</p>
+    <input type="text" id="participant-name" placeholder="Your name here">
+    <p style="font-size: 12px;">(LAST NAME FIRST NAME)</p>
+    <p style="font-size: 12px;">(No commas, periods etc.)</p>
+    <button onclick="startSurvey()">Start</button>
+</div>
 
-    <div id="valentine-container" class="hidden">
-        <h1>Will you be my Valentine? 💖</h1>
-        <div id="gif-container">
-            <img id="main-gif" src="intro.gif" width="300" alt="Intro GIF">
-        </div>
-        <p id="flavor-text">Think carefully before answering! 🤔</p>
+<!-- SURVEY -->
+<div id="survey-container" class="container hidden">
+    <p id="question"></p>
+    <div id="choices-container"></div>
+</div>
 
-        <div class="button-container">
-            <button class="yes-button" onclick="handleYesClick()">Yes</button>
-            <button class="no-button" onclick="handleNoClick()">No</button>
-        </div>
-    </div>
+<!-- VALENTINE -->
+<div id="valentine-container" class="container hidden">
+    <h1>Will you be my Valentine? 💖</h1>
 
-    <audio id="click-sound" src="click.wav"></audio>
+    <img id="main-gif" src="intro.gif" width="300" alt="Valentine GIF">
 
-    <script>
-        let surveyStep = 0;
-        let noClickCount = 0;
+    <p id="flavor-text">Think carefully before answering! 🤔</p>
 
-        const surveyData = [
-            { question: "What would be your favorite season? (If the Philippines had them)", choices: ["Summer ☀️", "Winter ❄️", "Spring 🌸", "Fall 🍂"] },
-            { question: "Pick a pet!", choices: ["Dog 🐶", "Cat 🐱", "Fish 🐟", "Lizard 🦎"] },
-            { question: "Which drink is the best?", choices: ["Coffee ☕", "Sting ⚡", "Coke 🥤", "Water 💧"] },
-            { question: "Which vehicle do you like more?", choices: ["Car 🚗", "Motorcycle 🏍️", "Skateboard 🛹", "Bike 🚲 (LMAO)"] },
-            { question: "If you become the president all of a sudden, what would you do?", choices: ["Enforce World Peace (Impossible) ☮️", "Print Infinite Money 💰", "Resign immediately 🏃💨", "Implement a five-year socio-economic reform plan focused on sustainable infrastructure, wealth redistribution, and systemic anti-corruption measures while navigating geopolitical tensions and ensuring national stability. 📜🤓", "Kill Everyone"] },
-            { question: "If you were given a time machine, where (or when) would you go?", choices: ["Back to the dinosaurs and ride a T-Rex 🦖", "The medieval times to become a knight ⚔️", "The future to see flying cars 🚀", "Back to 5 minutes ago to avoid answering this question ⏳", "Nowhere, time travel is dangerous and full of paradoxes! 😰"] },  
-            { question: "If you could have one superpower, what would it be?", choices: ["Invisibility 🫥", "Gravity Control 🌀", "Super Strength 💪", "Time Travel ⏳", "Summon unlimited snacks 🍕🍩", "I don't want any (BORING!)"] },
-            { question: "You wake up and find out you’re now the main character in an anime. What’s your genre?", choices: ["Shonen – Time to train for 100 episodes 💪🔥", "Romance – Where’s my love triangle? 💕", "Isekai – Guess I live in a fantasy world now 🏰", "Slice of Life – Just chilling, nothing happens ☕", "Horror – Wait... why is everything dark? 👀", "A complex psychological thriller with layers of deep character development, intricate political themes, and existential dilemmas, culminating in a thought-provoking yet ambiguous ending. 🧩🤯"] },  
-            { question: "A genie appears and grants you one wish. What do you ask for?", choices: ["Infinite money 💰", "World peace 🌍✌️", "Superpowers, obviously ⚡", "Unlimited food that never goes bad 🍔", "I am content with what I have. I want another person to get what they wish. (WOAH?)"] },  
-            { question: "Final Question... are you ready?", choices: ["Yes ✅", "No ❌", "Maybe 🤔", "What’s happening? 😳"] }
-        ];
+    <button class="yes-button" onclick="handleYesClick()">Yes</button>
+    <button class="no-button" onclick="handleNoClick()">No</button>
+</div>
 
-        const messages = [
-            "Are you sure? 🥺", "Please reconsider... 😢", "You’re breaking my heart... 💔",
-            "I'll teach you how to ride a bike... 🚲", "What if I cry? 😭", "Think of the starving children in Africa! 👶",
-            "Last chance! 🫣", "Aww, really? 😞", "Really? No regrets? 😔",
-            "Okay... goodbye forever. 👋"
-        ];
+<audio id="click-sound" src="click.wav"></audio>
 
-        function playClickSound() {
-            const sound = document.getElementById("click-sound");
-            sound.currentTime = 0;
-            sound.play();
+<script>
+let participantName = "";
+let surveyStep = 0;
+let noClickCount = 0;
+
+/* 🔥 CHANGE THIS NAME */
+const chosenNames = ["cabanag archelle blessy"]; 
+
+const surveyData = [
+{ question: "Pick your 2026 coping mechanism:",
+  choices: ["Gym arc 💪", "Bedrotting but istitik 🛌", "Digital detox era 📵", "Starting 4 side hustles 💻", "None of the Above (really?)"] },
+
+{ question: "What’s your algorithm feeding you lately?",
+  choices: ["Gym edits 🗿", "Relationship memes 🥹", "Political chaos 📰", "Cat videos 🐱", "6 7", "None of the Above (again?)"] },
+
+{ question: "Which arc are you in right now?",
+  choices: ["Villain arc 😈", "Healing arc 🌿", "Locked in 🔒", "Redemption Arc 🐦‍🔥", "Just surviving 💀"] },
+
+{ question: "What’s your toxic trait?",
+  choices: ["Overthinking 🧠", "Replying late ⏳", "Accidental ghosting 👻", "Caring too much 🤍"] },
+
+{ question: "If you could reset 2026 so far...",
+  choices: ["Yes immediately 🔄", "Only if memories stay 🧩", "No, I need my character development 📈", "I refuse to elaborate 😶"] },
+
+{ question: "Final Question... are you ready?",
+  choices: ["Yes ✅", "No ❌", "Maybe 🤔", "What’s happening? 😳"] }
+];
+
+const messages = [
+"Are you sure? 🥺",
+"Please reconsider... 😢",
+"You’re breaking my heart... 💔",
+"What if I cry? 😭",
+"Last chance... 🫣",
+"Okay... dramatic. 😒",
+"Still no? 😔",
+"Wow. 😐",
+"This is getting awkward.",
+"Fine. I respect it. 😌"
+];
+
+function playClickSound() {
+    const sound = document.getElementById("click-sound");
+    sound.currentTime = 0;
+    sound.play();
+}
+
+function startSurvey() {
+    const input = document.getElementById("participant-name").value.trim();
+    if (input === "") {
+        alert("Please enter your name first! (LAST NAME FIRST NAME MIDDLE NAME) (No commas, periods etc.)");
+        return;
+    }
+
+    participantName = input;
+    document.getElementById("name-container").classList.add("hidden");
+    document.getElementById("survey-container").classList.remove("hidden");
+
+    nextQuestion();
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+function normalizeName(name) {
+    return name.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function isNameValid(input, names) {
+    const normalizedInput = normalizeName(input);
+    return names.some(name => {
+        const normalizedName = normalizeName(name);
+        // Allow exact match or partial match
+        return normalizedInput === normalizedName || normalizedName.includes(normalizedInput);
+    });
+}
+
+function nextQuestion() {
+    playClickSound();
+
+    if (surveyStep < surveyData.length) {
+        const questionText = document.getElementById("question");
+        const choicesContainer = document.getElementById("choices-container");
+
+        questionText.textContent = surveyData[surveyStep].question;
+        choicesContainer.innerHTML = "";
+
+        let shuffledChoices = [...surveyData[surveyStep].choices];
+        shuffleArray(shuffledChoices);
+
+        shuffledChoices.forEach(choice => {
+            const button = document.createElement("button");
+            button.textContent = choice;
+            button.onclick = nextQuestion;
+            choicesContainer.appendChild(button);
+        });
+
+        surveyStep++;
+    } else {
+        document.getElementById("survey-container").classList.add("hidden");
+
+        localStorage.setItem("participantName", participantName);
+
+        if (isNameValid(participantName, chosenNames)) {
+            document.getElementById("survey-title").textContent = "SURPRISE!";
+            document.getElementById("valentine-container").classList.remove("hidden");
+        } else {
+            window.location.href = "thankyou.html";
         }
+    }
+}
 
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
+function handleNoClick() {
+    playClickSound();
 
-        function nextQuestion() {
-            playClickSound();
-            if (surveyStep < surveyData.length) {
-                const questionText = document.getElementById("question");
-                const choicesContainer = document.getElementById("choices-container");
+    const noButton = document.querySelector(".no-button");
+    const flavorText = document.getElementById("flavor-text");
 
-                questionText.textContent = surveyData[surveyStep].question;
-                choicesContainer.innerHTML = "";
+    if (noClickCount < messages.length) {
+        flavorText.textContent = messages[noClickCount];
+        noButton.style.transform = `scale(${1 - noClickCount * 0.1})`;
+    } else {
+        noButton.style.display = "none";
+        flavorText.textContent = "Okay fine, you win 😌";
+    }
 
-                // Clone the choices array and shuffle them
-                let shuffledChoices = [...surveyData[surveyStep].choices];
-                shuffleArray(shuffledChoices);
+    noClickCount++;
+}
 
-                shuffledChoices.forEach(choice => {
-                    const button = document.createElement("button");
-                    button.textContent = choice;
-                    button.onclick = nextQuestion;
-                    button.addEventListener("click", playClickSound);
-                    choicesContainer.appendChild(button);
-                });
-
-                surveyStep++;
-            } else {
-                document.getElementById("survey-container").classList.add("hidden");
-                document.getElementById("survey-title").textContent = "SURPRISE!";
-                document.getElementById("valentine-container").classList.remove("hidden");
-            }
-        }
-
-        function handleNoClick() {
-            playClickSound();
-            const noButton = document.querySelector(".no-button");
-            const gif = document.getElementById("main-gif");
-            const flavorText = document.getElementById("flavor-text");
-
-            if (noClickCount < 9) {
-                flavorText.textContent = messages[noClickCount];
-                noButton.style.transform = `scale(${1 - noClickCount * 0.1})`;
-                gif.src = "no.gif";
-            } else {
-                noButton.classList.add("hidden");
-                flavorText.textContent = "Aww, you like me that much? 💕 (Impossible)";
-            }
-
-            noClickCount++;
-        }
-
-        function handleYesClick() {
-            playClickSound();
-            const gif = document.getElementById("main-gif");
-            const flavorText = document.getElementById("flavor-text");
-
-            gif.src = "yes.gif";  
-            flavorText.textContent = "YAY! You made my day! ❤️🥰";
-
-            setTimeout(() => {
-                window.location.href = "yes_page.html";
-            }, 2000);
-        }
-
-        window.onload = nextQuestion;
-    </script>
+function handleYesClick() {
+    playClickSound();
+    const gif = document.getElementById("main-gif");
+    gif.src = "yes.gif";
+    document.getElementById("flavor-text").textContent = "YAY! You made my day ❤️";
+    setTimeout(() => {
+        window.location.href = "yes_page.html";
+    }, 2000);
+}
+</script>
 
 </body>
 </html>

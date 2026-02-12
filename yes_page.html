@@ -1,120 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmed</title>
-    <style>
-        body {
-            font-family: 'Lora', serif;
-            text-align: center;
-            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
-            background-size: 300% 300%;
-            animation: gradientBG 8s ease infinite;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmed 💖</title>
 
-        @keyframes gradientBG {
-                0% {
-                    background-position: 0% 50%;
-                }
-                50% {
-                    background-position: 100% 50%;
-                }
-                100% {
-                    background-position: 0% 50%;
-                }
-        }
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
 
+<style>
+body {
+    font-family: 'Lora', serif;
+    text-align: center;
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+    background-size: 300% 300%;
+    animation: gradientBG 8s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
 
-        #container {
-            max-width: 500px;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 0.8s ease-in-out;
-        }
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-        h1 {
-            color: #ff4d6d;
-        }
+.container {
+    width: 100%;
+    max-width: 520px;
+    background: white;
+    padding: 35px 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    animation: fadeIn 0.8s ease-in-out;
+}
 
-        p {
-            font-size: 18px;
-        }
+h1 {
+    color: #ff4d6d;
+    margin-bottom: 10px;
+}
 
-        .hidden {
-            display: none;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
+.subtitle {
+    margin-bottom: 20px;
+}
 
-        button {
-            font-size: 18px;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            background-color: #ff4d6d;
-            color: white;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
+button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    background-color: #ff4d6d;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+    font-size: 15px;
+}
 
-        button:hover {
-            background-color: #e03e5a;
-            transform: scale(1.1);
-        }
+button:hover {
+    background-color: #e03e5a;
+    transform: scale(1.05);
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+a {
+    display: inline-block;
+    margin-top: 5px;
+    text-decoration: none;
+    color: #ff4d6d;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#letter {
+    margin-top: 25px;
+    text-align: justify;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.6s ease, max-height 0.6s ease;
+}
+
+#letter.show {
+    opacity: 1;
+    max-height: 800px;
+}
+
+.letter-content {
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.signature {
+    text-align: center;
+    margin-top: 20px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
 </head>
+
 <body>
 
-    <div id="container">
-        <h1>Thanks!!</h1>
-        <p>Send a screenshot of this page and send it to me pweasee! ❤️</p>
-        
-        <button onclick="showLetter()">Open a Secret Letter 💌</button>
-        
-        <div id="letter" class="hidden" style="text-align: justify;">
-            <h2 style="text-align: center;">Dear You,</h2>
-            <p style="text-indent: 30px;">
-                I just wanted to take a moment to tell you how special you are to me.  
-                Even if we're a little awkward... actually, scrap the "little" part because we REALLY are.  
-                At this point, if awkwardness was an Olympic sport, we’d be gold medalists.
-            </p>
-            <p style="text-indent: 30px;">
-                But honestly, I wouldn't have it any other way because, despite all that, its still you that I keep falling for.  
-                You make even the most random moments feel special, and somehow, I find myself smiling like an idiot just thinking about you.  
-                So, thank you for being you.
-            </p>
-            <p style="text-align: center;">Sincerely, Ziwara</p>
-        </div>
+<div class="container">
 
-        <br>
-        <br>
-        <a href="index.html">Go back</a>
+    <h1>Thanks!! 💕</h1>
+    <p class="subtitle">
+        This letter is just for you, okay! ❤️
+    </p>
+    
+    <button id="toggleButton" onclick="toggleLetter()">Open a Secret Letter 💌</button>
+
+    <div id="letter">
+        <i style="text-align:center;">After reading, pwease send a screenshot to this drive:</i>
+        <a style="text-align:center;" href="https://drive.google.com/drive/folders/1D6OMEQ2eG4jTdU4euMbh7h1Bk9S-9frA?usp=drive_link">Google Drive Link</a>
+
+        <br></br>
+
+        <b style="text-align:left;">Dear You,</b>
+
+        <div class="letter-content">
+            <p style="text-indent: 30px;">
+                Dili jud unta nako ni ipadayag, but I guess this is the time to come clean. I’m not always the best with words, especially when I’m around you, so I made this website para ma-express nako akong feelings.
+            </p>
+
+            <p style="text-indent: 30px;">
+                There’s just something about your smile jud da. It’s simple, but it stays in my head longer than it probably should. And the way you treat me, your kindness, the small things you do, the way you listen, it means more to me than you realize.
+
+                I get awkward when I’m with you, murag mu-short circuit akong brain. I overthink what I say, sometimes I don’t say enough, and sometimes I feel like I look stupid. I really want to get to know you better. And I don’t know exactly when, but somewhere along the way, you became someone very important to me. So I just wanted to say thank you / salamat / xièxiè / arigatou for your smile, your kindness, and for being someone who unknowingly makes my world a little brighter.
+            </p>
+
+            <p style="text-indent: 30px;"></p>
+                One more thing, always remember to drink water ha and don’t starve yourself. Always eat when needed hehehe! That’s all, thank you.
+            </p>
+
+            <div class="signature">
+                Sincerely,<br>
+                <i>[your secret admirer]</i>
+            </div>
+        </div>
     </div>
 
-    <audio id="open-sound" src="paper_open.ogg"></audio>
+    <a href="index.html">Go back</a>
 
-    <script>
-        function showLetter() {
-            document.getElementById("open-sound").play(); // Play sound effect
-            const letter = document.getElementById("letter");
-            letter.classList.remove("hidden");
-            setTimeout(() => { letter.style.opacity = "1"; }, 100); // Smooth fade-in effect
-        }
-    </script>
+</div>
+
+<audio id="open-sound" src="paper_open.ogg"></audio>
+
+<script>
+function toggleLetter() {
+    const letter = document.getElementById("letter");
+    const button = document.getElementById("toggleButton");
+    const sound = document.getElementById("open-sound");
+
+    letter.classList.toggle("show");
+
+    if (letter.classList.contains("show")) {
+        sound.play();
+        button.textContent = "Close the Letter 💌";
+    } else {
+        button.textContent = "Open a Secret Letter 💌";
+    }
+}
+</script>
 
 </body>
 </html>
