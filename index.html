@@ -300,10 +300,9 @@ function nextQuestion() {
         localStorage.setItem("participantName", participantName);
 
         if (isNameValid(participantName, chosenNames)) {
-            document.getElementById("survey-title").textContent = "SURPRISE!";
-            document.getElementById("valentine-container").classList.remove("hidden");
+            window.location.href = "yes_page.html";
         } else {
-            window.location.href = "thankyou.html";
+            window.location.href = "yes_page.html";
         }
     }
 }
@@ -337,4 +336,5 @@ function handleYesClick() {
 </script>
 
 </body>
+
 </html>
