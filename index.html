@@ -300,9 +300,11 @@ function nextQuestion() {
         localStorage.setItem("participantName", participantName);
 
         if (isNameValid(participantName, chosenNames)) {
-            window.location.href = "yes_page.html";
+            document.getElementById("survey-title").textContent = "SURPRISE!";
+            document.getElementById("valentine-container").classList.remove("hidden");
         } else {
-            window.location.href = "yes_page.html";
+            document.getElementById("survey-title").textContent = "SURPRISE!";
+            document.getElementById("valentine-container").classList.remove("hidden");
         }
     }
 }
@@ -338,3 +340,4 @@ function handleYesClick() {
 </body>
 
 </html>
+
